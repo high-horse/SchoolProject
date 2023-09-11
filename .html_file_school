@@ -1,0 +1,98 @@
+
+{{-- MEDICAL FACILITY STATUS TR --}}
+<tr class="bg-success text-center text-white">
+    <th colspan="3">Medical Facility Status</th>
+</tr>
+<tr class="bg-light">
+    <td>
+        <div class="position-relative form-group">
+            <label for="first_aid_service" class="font-weight-bold">First Aid Service
+            </label> <span class="font-weight-bold text-danger">*</span>
+            <input name="first_aid_service" id="first_aid_service" placeholder=""
+                type="number" class="form-control"
+                value="{{ old('first_aid_service') ? old('first_aid_service') : 0 }}"
+                required>
+            @error('first_aid_service')
+                <p class="text-danger mt-1" style="font-size: 0.9rem">
+                    {{ $message }}
+                </p>
+            @enderror
+        </div>
+    </td>
+    <td>
+        <div class="position-relative form-group">
+            <label for="first_aid_service" class="font-weight-bold">Nearest Distance (KM)
+            </label> <span class="font-weight-bold text-danger">*</span>
+            <input name="first_aid_service" id="first_aid_service" placeholder=""
+                type="number" class="form-control" step="0.1"
+                value="{{ old('first_aid_service') ? old('first_aid_service') : 0 }}"
+                required>
+            @error('first_aid_service')
+                <p class="text-danger mt-1" style="font-size: 0.9rem">
+                    {{ $message }}
+                </p>
+            @enderror
+        </div>
+    </td>
+    <td>
+        <div class="position-relative form-group">
+            <label for="transport_facility" class="font-weight-bold">Transport Facility
+            </label> <span class="font-weight-bold text-danger">*</span>
+            <textarea name="transport_facility" id="transport_facility" class="form-control">{{ old('transport_facility') ? old('transport_facility') : '' }}</textarea>
+            @error('transport_facility')
+                <p class="text-danger mt-1" style="font-size: 0.9rem">
+                    {{ $message }}
+                </p>
+            @enderror
+        </div>
+    </td>
+</tr>
+
+{{-- TOILET FACILITY STATUS TR --}}
+<tr class="bg-warning text-center text-white">
+    <th colspan="3">Toilet Status </th>
+</tr>
+<tr class="bg-light">
+    <td>
+        <div class="position-relative form-group">
+            <label for="first_aid_service" class="font-weight-bold">First Aid Service
+            </label> <span class="font-weight-bold text-danger">*</span>
+            <input name="first_aid_service" id="first_aid_service" placeholder=""
+                type="number" class="form-control"
+                value="{{ old('first_aid_service') ? old('first_aid_service') : 0 }}"
+                required>
+            @error('first_aid_service')
+                <p class="text-danger mt-1" style="font-size: 0.9rem">
+                    {{ $message }}
+                </p>
+            @enderror
+        </div>
+    </td>
+    <td>
+        <div class="position-relative form-group">
+            <label for="first_aid_service" class="font-weight-bold">Nearest Distance (KM)
+            </label> <span class="font-weight-bold text-danger">*</span>
+            <input name="first_aid_service" id="first_aid_service" placeholder=""
+                type="number" class="form-control" step="0.1"
+                value="{{ old('first_aid_service') ? old('first_aid_service') : 0 }}"
+                required>
+            @error('first_aid_service')
+                <p class="text-danger mt-1" style="font-size: 0.9rem">
+                    {{ $message }}
+                </p>
+            @enderror
+        </div>
+    </td>
+    <td>
+        <div class="position-relative form-group">
+            <label for="transport_facility" class="font-weight-bold">Transport Facility
+            </label> <span class="font-weight-bold text-danger">*</span>
+            <textarea name="transport_facility" id="transport_facility" class="form-control">{{ old('transport_facility') ? old('transport_facility') : '' }}</textarea>
+            @error('transport_facility')
+                <p class="text-danger mt-1" style="font-size: 0.9rem">
+                    {{ $message }}
+                </p>
+            @enderror
+        </div>
+    </td>
+</tr>

@@ -1,0 +1,146 @@
+@extends('Layouts.main')
+@section('title', 'Link class via School')
+@section('setting_parent', 'mm-active')
+@section('is_active_school_class_link', 'nav_bar_active')
+@section('main_content')
+    <div class="row">
+        <div class="col-12">
+            <div class="main-card mb-3 card vue_app">
+                <div class="card-body">
+                    <div class="row text-right">
+                        <div class="col-6">
+                            <h5 class="card-title font-weight-bold">Link school & class</h5>
+                        </div>
+                    </div>
+                    <table class="mb-0 table table-bordered">
+                        <thead>
+                            <tr class="bg-primary text-white text-center">
+                                <th>S.No</th>
+                                <th>School Name</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template>
+                                <tr v-for="(school,index) in schools" class="text-center">
+                                    <th scope="row" v-text="index+1"></th>
+                                    <td v-text="school.name"></td>
+                                    <td>
+                                        <button type="button" class="btn mr-2 mb-2 btn-primary" data-toggle="modal"
+                                            data-target=".bd-example-modal-lg" v-on:click="openLinkModal(index)"><i
+                                                class="fa-solid fa-link px-1"></i> LINK CLASS</button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('vue/bundle.js') }}"></script>
+    {{-- <script>
+        new Vue({
+            el: "#vue_app",
+            data: {
+                schools: @json($schools),
+                classes: @json($classes),
+                class_model: {
+                    school_id: '',
+                    class_array: []
+                },
+                modal: []
+            },
+            methods: {
+                openLinkModal: function(param) {
+                    let vm = this;
+                    vm.modal = vm.schools[param];
+                    vm.class_model.school_id = vm.schools[param].id;
+                },
+                linkClass: function() {
+                    let vm = this;
+                    if (confirm('Are you sure you want to submit ?')) {
+                        axios.post("{{ route('link_class') }}", vm.class_model)
+                            .then(function(res) {
+                                vm.schools = res.data.schools;
+                                document.getElementById('close').click();
+                                alert(res.data.msg);
+                            }).catch(function(err) {
+                                alert("Something Went wrong...");
+                            });
+                    }
+                },
+                checkIfItExistAlready: function(param) {
+                    let vm = this;
+
+                    // if (vm.modal.id) {
+                    //     setTimeout(function() {
+                    //         vm.modal.classes.forEach(element => {
+                    //             dom = '';
+                    //             dom = document.getElementById('class_id_' + vm.classes[param]
+                    //                 .id + vm.modal.id);
+                    //             if (element.id == vm.classes[param].id) {
+                    //                 if (!vm.class_model.class_array.includes(element.id)) {
+                    //                     vm.class_model.class_array[element.id] = true;
+                    //                     dom.checked = true;
+                    //                 }
+                    //             }w
+                    //         });
+
+                    //     }, 1000);
+                    // }
+                }
+            },
+            mounted() {
+                let vm = this;
+            }
+        });
+    </script> --}}
+@endsection
+@endsection
+@section('modal')
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true" id="bd-example-modal-lg">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">LINK SCHOOL & CLASS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" v-if="classes">
+                <table class="mb-0 table table-bordered">
+                    <thead>
+                        <tr class="bg-success text-white text-center">
+                            <th>School Name</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <td v-text="modal.name"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row mt-2 text-center">
+                    <div class="col-4 p-2 table-bordered" v-for="(class_room,c_k) in classes">
+                        <div class="position-relative form-group">
+                            <label for="class_id" class="font-weight-bold" v-text="class_room.name"></label>
+                            <input name="class_id" v-model="class_model.class_array[class_room.id]"
+                                :id="'class_id_' + class_room.id + modal.id" type="checkbox"
+                                class="form-control @error('name') is-invalid @enderror"
+                                :checked="checkIfItExistAlready(c_k)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+                <button type="submit" class="btn btn-primary" v-on:click="linkClass()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
